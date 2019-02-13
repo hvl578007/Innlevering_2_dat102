@@ -4,6 +4,9 @@ import no.hvl.dat102.mengde.adt.MengdeADT;
 import java.util.Iterator;
 import java.util.Random;
 
+/**
+ * TabellMengde
+ */
 public class TabellMengde<T> implements MengdeADT<T>  {
 
     private final static Random tilf = new Random();
@@ -127,10 +130,26 @@ public class TabellMengde<T> implements MengdeADT<T>  {
         return likeMengder;
     }
 
+    // Oppgåve 1 b) i)
     @Override
     public MengdeADT<T> union(MengdeADT<T> m2) {
-        //TODO
-        return null;
+        MengdeADT<T> begge = new TabellMengde<T>();
+        T element = null;
+
+        for(int i = 0; i < antall(); i++) { //evt iterator her også
+            element = tab[i];
+            ((TabellMengde<T>) begge).settInn(element);
+        }
+
+        Iterator<T> teljar = m2.oppramser();
+        while(teljar.hasNext()) {
+            element = teljar.next();
+            if(!inneholder(element)) {
+                ((TabellMengde<T>) begge).settInn(element);
+            }
+        }
+
+        return begge;
     }
 
     private void settInn(T element) {
@@ -141,23 +160,56 @@ public class TabellMengde<T> implements MengdeADT<T>  {
         antall++;
     }
 
+    // Oppgåve 1 b) ii)
     @Override
     public MengdeADT<T> snitt(MengdeADT<T> m2) {
-        //TODO
-        return null;
+        MengdeADT<T> snittM = new TabellMengde<T>();
+        T element;
+
+        Iterator<T> teljar = m2.oppramser();
+
+        while(teljar.hasNext()) {
+            element = teljar.next();
+            if(inneholder(element)) {
+                ((TabellMengde<T>) snittM).settInn(element);
+            }
+        }
+
+        return snittM;
     }
 
+    // Oppgåve 1 b) iii)
     @Override
     public MengdeADT<T> differens(MengdeADT<T> m2) {
-        //TODO
-        return null;
+        MengdeADT<T> differensM = new TabellMengde<T>();
+        T element;
+        
+        Iterator<T> teljar = this.oppramser();
+
+        while(teljar.hasNext()) {
+            element = teljar.next();
+            if(!m2.inneholder(element)) {
+                ((TabellMengde<T>) differensM).settInn(element);
+            }
+        }
+
+        return differensM;
     }
 
+    // Oppgåve 1 b) iv)
     @Override
     public boolean undermengde(MengdeADT<T> m2) {
-        //TODO
         boolean erUnderMengde = true;
-        return false;
+        
+        Iterator<T> teljar = m2.oppramser();
+
+        while(erUnderMengde && teljar.hasNext()) {
+            if(!inneholder(teljar.next())) {
+                erUnderMengde = false;
+            }
+        }
+        
+        return erUnderMengde;
     }
 
     @Override

@@ -121,10 +121,28 @@ public class KjedetMengde<T> implements MengdeADT<T> {
         return likeMengder;
     }
 
+    // Oppgåve 1 b) i)
     @Override
     public MengdeADT<T> union(MengdeADT<T> m2) {
-        //TODO
-        return null;
+        MengdeADT<T> begge = new KjedetMengde<T>();
+        LinearNode<T> aktuell = start;
+        T element = null;
+
+        while(aktuell != null) { //evt iterator her også
+            element = aktuell.getElement();
+            aktuell = aktuell.getNeste();
+            ((KjedetMengde<T>) begge).settInn(element);
+        }
+
+        Iterator<T> teljar = m2.oppramser();
+        while(teljar.hasNext()) {
+            element = teljar.next();
+            if(!inneholder(element)) {
+                ((KjedetMengde<T>) begge).settInn(element);
+            }
+        }
+
+        return begge;
     }
 
     private void settInn(T element) {
@@ -134,22 +152,56 @@ public class KjedetMengde<T> implements MengdeADT<T> {
         antall++;
     }
 
+    // Oppgåve 1 b) ii)
     @Override
     public MengdeADT<T> snitt(MengdeADT<T> m2) {
-        //TODO
-        return null;
+        MengdeADT<T> snittM = new KjedetMengde<T>();
+        T element;
+
+        Iterator<T> teljar = m2.oppramser();
+
+        while(teljar.hasNext()) {
+            element = teljar.next();
+            if(inneholder(element)) {
+                ((KjedetMengde<T>) snittM).settInn(element);
+            }
+        }
+
+        return snittM;
     }
 
+    // Oppgåve 1 b) iii)
     @Override
     public MengdeADT<T> differens(MengdeADT<T> m2) {
-        //TODO
-        return null;
+        MengdeADT<T> differensM = new KjedetMengde<T>();
+        T element;
+        
+        Iterator<T> teljar = this.oppramser();
+
+        while(teljar.hasNext()) {
+            element = teljar.next();
+            if(!m2.inneholder(element)) {
+                ((KjedetMengde<T>) differensM).settInn(element);
+            }
+        }
+
+        return differensM;
     }
 
+    // Oppgåve 1 b) iv)
     @Override
     public boolean undermengde(MengdeADT<T> m2) {
-        //TODO
-        return false;
+        boolean erUnderMengde = true;
+        
+        Iterator<T> teljar = m2.oppramser();
+
+        while(erUnderMengde && teljar.hasNext()) {
+            if(!inneholder(teljar.next())) {
+                erUnderMengde = false;
+            }
+        }
+        
+        return erUnderMengde;
     }
 
     @Override

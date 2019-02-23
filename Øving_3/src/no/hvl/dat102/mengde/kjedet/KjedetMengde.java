@@ -1,4 +1,5 @@
-﻿package no.hvl.dat102.mengde.kjedet;
+﻿
+package no.hvl.dat102.mengde.kjedet;
 
 import no.hvl.dat102.mengde.adt.MengdeADT;
 import java.util.Random;
@@ -221,6 +222,20 @@ public class KjedetMengde<T> implements MengdeADT<T> {
     @Override
     public Iterator<T> oppramser() {
         return new KjedetIterator<T>(start);
+    }
+
+    @Override
+    public String toString() {
+        String resultat = "";
+        LinearNode<T> aktuell = start;
+        while(aktuell != null) {
+            resultat += aktuell.getElement().toString();
+            if(aktuell.getNeste() != null) {
+                resultat += ",\t";
+            }
+            aktuell = aktuell.getNeste();
+        }
+        return resultat;
     }
 
 }

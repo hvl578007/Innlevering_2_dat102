@@ -27,6 +27,7 @@ public class TestKjedetMengde {
     private Integer e7 = 7;
     private Integer e8 = 8;
     private Integer e9 = 9;
+    //kunne ha laga tabellar og så putta inn med for-løkker
 
     @Before
     public final void setup() {

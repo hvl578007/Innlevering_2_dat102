@@ -216,4 +216,13 @@ public class TabellMengde<T> implements MengdeADT<T>  {
     public Iterator<T> oppramser() {
         return new TabellIterator<T>(tab, antall);
     }
+
+    @Override
+    public String toString() {
+        String resultat = "";
+        for(int i = 0; i < antall; i++) {
+            resultat += tab[i].toString() + "\n";
+        }
+        return resultat;
+    }
 }

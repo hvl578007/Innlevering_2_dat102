@@ -1,0 +1,18 @@
+﻿/**
+ * Balansering_2_feil
+ */
+public class Balansering_3_feil {
+
+    public static void main(String[ args) {
+        
+        System.out.println("Hei");
+        System.out.println("Oi"));
+        System.out.println"Oooops");
+        testing()
+    }
+    
+    public static void testing) {
+        System.out.println("dette var dumt"));
+    }
+}
+}

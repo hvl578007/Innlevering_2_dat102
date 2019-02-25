@@ -1,0 +1,21 @@
+﻿import java.util.Arrays;
+
+/**
+ * Balansering_ok_1
+ */
+public class Balansering_ok_1 {
+
+    public static void main(String[] args) {
+        
+        System.out.println("hei!");
+        testing();
+    }
+
+    public static void testing() {
+        int[] tab = new int[5];
+        for (int i = 0; i < 5; i++) {
+            tab[i] = 5 - i;
+        }
+        System.out.println(Arrays.toString(tab));
+    }
+}
